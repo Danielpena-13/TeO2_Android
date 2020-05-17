@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">TeO2 V2</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">TeO2 App</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuración</string>
+
+    <string name="menu_home">Predios Disponibles</string>
+    <string name="menu_gallery">Seleccionados/Favoritos</string>
+    <string name="menu_slideshow">Estado de Tramite</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="LoremIpsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec faucibus fermentum lobortis. Cras dolor odio, vehicula nec purus ut, finibus hendrerit erat. Pellentesque ut turpis sed nisi consequat iaculis ac nec nisi. Integer at dapibus risus, vel interdum elit. Fusce commodo libero at purus laoreet, sit amet rutrum nibh lobortis. Donec pellentesque nibh eget tellus imperdiet consectetur. Donec eu metus lacinia, elementum tortor in, tristique quam. Integer tincidunt sem tellus, euismod ullamcorper leo semper nec. In at gravida odio. Nulla condimentum at velit vel tempus. Integer eu urna nec eros consequat accumsan pellentesque nec elit. Nullam ac fringilla arcu.
+        Duis vitae tincidunt enim, at convallis enim. Donec sit amet enim tincidunt nunc posuere elementum eget ut lectus. Phasellus eget nisl libero. Sed a tortor non odio vulputate lobortis a nec mauris. Integer ultricies urna ac scelerisque congue. Nullam mauris ligula, semper non placerat a, dictum eu neque. Ut eget fermentum lacus. Nunc sodales ipsum est, in varius nisi hendrerit vel. Vivamus consectetur sed erat in interdum.
+        Maecenas risus odio, fringilla et mattis ut, dictum eu urna. Cras eu consequat sem. Praesent sollicitudin dolor ac arcu porttitor euismod. Donec dapibus vestibulum lacus. Proin eleifend lectus vitae rhoncus venenatis. Phasellus varius nibh hendrerit tortor eleifend facilisis. Mauris dignissim dolor elementum, scelerisque urna vitae, bibendum lacus. Aliquam pretium finibus porta. Duis vehicula molestie neque ac dapibus. Morbi pretium magna tellus, non tincidunt erat aliquam et.
+        Sed semper mattis maximus. Nam nulla sapien, vulputate vehicula dui nec, bibendum commodo sem. Ut feugiat convallis lectus, ac scelerisque sapien posuere ac. Quisque augue massa, laoreet quis consectetur a, suscipit eu quam. Phasellus interdum, nunc placerat lobortis convallis, augue mauris ultrices eros, id aliquam velit mi eu dui. Fusce ornare sagittis varius. Nulla imperdiet faucibus ligula, venenatis luctus mauris rhoncus et. In vitae risus tristique, fringilla turpis sit amet, tempus ante. Vestibulum gravida consequat volutpat. Nunc iaculis cursus mauris, hendrerit rhoncus metus iaculis sit amet. Nulla ornare ante sit amet sem tempor pharetra. Aliquam varius interdum erat non cursus. Cras semper mattis orci, quis faucibus tellus hendrerit id. Integer ultricies euismod ligula scelerisque suscipit.
+        Nulla dignissim turpis odio, a dictum dui semper vitae. Quisque eleifend vulputate facilisis. Sed interdum ullamcorper ligula eget commodo. Vestibulum ut laoreet turpis. Donec non aliquam nunc, sit amet dictum nulla. Nulla ac orci erat. Donec tempus eget odio sed egestas. Donec sed arcu ante. Suspendisse potenti. Fusce rutrum finibus elit vel accumsan. Maecenas nisi quam, semper quis massa malesuada, dictum maximus odio. Sed at enim nec libero efficitur ornare eu a elit. Quisque faucibus nibh vitae hendrerit scelerisque. Integer euismod ultricies libero, vitae consectetur justo. Mauris rhoncus auctor orci, pulvinar ornare erat condimentum ut. Donec at nisi nec mi facilisis bibendum ut sed sapien.
+    </string>
+</resources>

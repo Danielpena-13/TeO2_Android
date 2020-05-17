@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardView"
+    android:foreground="?android:selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="173dp"
+    android:layout_height="260dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorCardView">
+        
+        <ImageView
+            android:id="@+id/img_persona"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/tx_nombreCampesino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre Campesino"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="3dp"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/img_persona"
+            />
+
+        <TextView
+            android:id="@+id/tx_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="id"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@+id/tx_nombreCampesino"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

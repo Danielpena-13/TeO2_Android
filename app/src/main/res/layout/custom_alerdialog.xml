@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="9dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:paddingTop="3dp">
+
+        <ImageView
+            android:id="@+id/img_wifiStatus"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_signal_wifi_off_black_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="You're not Connected to internet"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            android:layout_below="@id/img_wifiStatus"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
