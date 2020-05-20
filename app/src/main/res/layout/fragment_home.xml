@@ -14,7 +14,7 @@
         android:numColumns="2"
         android:horizontalSpacing="5dp"
         android:verticalSpacing="5dp"
-        android:layout_margin="2dp"
+        android:layout_margin="3dp"
         android:background="@color/colorWhite"/>
 
 </LinearLayout>

@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="9dp">
+    android:gravity="center">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/colorWhite"
         android:gravity="center"
-        android:paddingTop="3dp">
+        android:orientation="vertical"
+        android:padding="13dp">
 
         <ImageView
             android:id="@+id/img_wifiStatus"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:src="@drawable/ic_signal_wifi_off_black_24dp" />
+            android:src="@drawable/ic_signal_wifi_off_black_24dp"
+            android:tint="@color/colorButton" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="159dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="You're not Connected to internet"
-            android:textSize="13dp"
-            android:textStyle="bold"
-            android:layout_below="@id/img_wifiStatus"/>
-    </RelativeLayout>
+            android:text="@string/msg_internet_status"
+            android:textSize="16sp" />
+    </LinearLayout>
 
+    <Button
+        android:id="@+id/bt_ok"
+        android:layout_width="185dp"
+        android:layout_height="38sp"
+        android:layout_below="@id/linear1"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorButton"
+        android:text="OK"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
 
-</LinearLayout>
+</RelativeLayout>

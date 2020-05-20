@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
@@ -22,6 +23,9 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"
         app:itemIconTint="@color/colorAccent"
-        app:itemIconSize="28dp"/>
+        android:background="@color/colorWhite"
+        app:itemIconSize="28dp"
+        app:elevation="13dp"
+        android:elevation="13dp" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

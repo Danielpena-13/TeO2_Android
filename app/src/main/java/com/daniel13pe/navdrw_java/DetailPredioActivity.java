@@ -10,9 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.daniel13pe.navdrw_java.databinding.ActivityDetailPredioBinding;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
+import java.util.Objects;
+
 public class DetailPredioActivity extends AppCompatActivity {
+
+    //ActivityBinding Class instance
+    ActivityDetailPredioBinding binding;
 
     private TextView nombrePredioDetalleAct;
     private ImageView imgPredioDetalleAct;
@@ -23,11 +29,15 @@ public class DetailPredioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_predio);
-        //Enlace de variables e instancias
-        bindInstances();
-        //Muestra BackArrow
 
+        //ViewBinding
+        binding = ActivityDetailPredioBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        //Enlace de variables e instancias
+        bindViews();
+
+        //Muestra BackArrow
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null){ getSupportActionBar()
                 .setDisplayHomeAsUpEnabled(true);}
@@ -36,16 +46,16 @@ public class DetailPredioActivity extends AppCompatActivity {
         loadSelectedData();
 
     }
-    private void bindInstances() {
-        nombrePredioDetalleAct = (TextView) findViewById(R.id.tx_nombrePredioDetail_A);
-        imgPredioDetalleAct = (ImageView) findViewById(R.id.img_campDetail_A);
-        toolbar = (Toolbar) findViewById(R.id.toolbar_detail);
-        ctl = (CollapsingToolbarLayout) findViewById(R.id.collapsingBar);
+    private void bindViews() {
+        nombrePredioDetalleAct = binding.txNombrePredioDetailA;
+        imgPredioDetalleAct = binding.imgCampDetailA;
+        toolbar = binding.toolbarDetail;
+        ctl = binding.collapsingBar;
     }
 
     private void loadSelectedData() {
         Intent intent = getIntent();
-        ctl.setTitle(intent.getExtras().getString("NombrePredio"));
+        ctl.setTitle(Objects.requireNonNull(intent.getExtras()).getString("NombrePredio"));
         nombrePredioDetalleAct.setText(intent.getExtras().getString("NombrePredio"));
         //Glide
         Glide.with(this)

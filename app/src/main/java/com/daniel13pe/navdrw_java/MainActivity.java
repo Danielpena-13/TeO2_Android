@@ -3,12 +3,14 @@ package com.daniel13pe.navdrw_java;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.daniel13pe.navdrw_java.databinding.ActivityMainBinding;
 import com.daniel13pe.navdrw_java.ui.gallery.GalleryFragment;
 import com.daniel13pe.navdrw_java.ui.home.HomeFragment;
 import com.daniel13pe.navdrw_java.ui.networkstatus.NetworkStatusDialog;
@@ -26,29 +28,37 @@ import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
 
-    Toolbar toolbar;
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    Boolean wifiConnected = false;
+    //ActivityBinding Class instance
+    ActivityMainBinding binding;
+
+    private DrawerLayout drawerLayout;
+    private Boolean wifiConnected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.toolbar);
+        //ViewBinding
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        //Setting up ToolBar
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Seleccionar onClickEvent al navigationView
-        navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = binding.navView;
         navigationView.setNavigationItemSelectedListener(this);
 
-        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout = binding.drawerLayout;
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
+
+        //Checking for SDK version for Styling
+        versionStyle();
 
         //Check for Network Status
         checkNetworkConnectionStatus();
@@ -60,6 +70,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
             navigationView.setCheckedItem(R.id.nav_home);
         }
 
+        //Floating Button Action
         floatingButton();
     }
 
@@ -119,5 +130,11 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return super .onCreateOptionsMenu(menu);
+    }
+
+    public void versionStyle(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
+        }
     }
 }
