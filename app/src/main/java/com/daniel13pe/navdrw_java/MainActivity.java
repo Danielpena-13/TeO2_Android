@@ -1,8 +1,12 @@
 package com.daniel13pe.navdrw_java;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -14,6 +18,7 @@ import com.daniel13pe.navdrw_java.databinding.ActivityMainBinding;
 import com.daniel13pe.navdrw_java.ui.gallery.GalleryFragment;
 import com.daniel13pe.navdrw_java.ui.home.HomeFragment;
 import com.daniel13pe.navdrw_java.ui.networkstatus.NetworkStatusDialog;
+import com.daniel13pe.navdrw_java.ui.networkstatus.NoConnectedFragment;
 import com.daniel13pe.navdrw_java.ui.slideshow.SlideshowFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -32,30 +37,30 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     ActivityMainBinding binding;
 
     private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
     private Boolean wifiConnected = false;
+    private WifiManager wifiManager;
+    private NetworkStatusDialog networkStatusDialog;
+    private NavigationView navigationView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //ViewBinding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         //Setting up ToolBar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Seleccionar onClickEvent al navigationView
-        NavigationView navigationView = binding.navView;
+        navigationView = binding.navView;
         navigationView.setNavigationItemSelectedListener(this);
 
-        drawerLayout = binding.drawerLayout;
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
-                drawerLayout, toolbar, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
-        actionBarDrawerToggle.syncState();
+        //Action Bar Toogle Configuration on Nav. Drawer
+        actionBarToggleConf();
 
         //Checking for SDK version for Styling
         versionStyle();
@@ -63,21 +68,59 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         //Check for Network Status
         checkNetworkConnectionStatus();
 
-        //Cargar Fragments and makeSure when device rotating
-        if(savedInstanceState == null && wifiConnected){
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                    new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
+        //Cargar Fragment en primera instancia y asegurar rotacion segura
+        instantStateFragments(savedInstanceState);
 
         //Floating Button Action
         floatingButton();
     }
 
-    private void checkNetworkConnectionStatus() {
+    private void instantStateFragments(Bundle instanceState) {
+        if(instanceState == null && wifiConnected){
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                    new HomeFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_home);
+        }else{
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                    new NoConnectedFragment()).commit();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        registerReceiver(wifiStateReceiver, intentFilter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(wifiStateReceiver);
+    }
+
+    private BroadcastReceiver wifiStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int wifiStateExtra = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE,
+                    WifiManager.WIFI_STATE_UNKNOWN);
+            switch (wifiStateExtra){
+                case WifiManager.WIFI_STATE_ENABLED:
+                    wifiConnected = true;
+                    break;
+                case WifiManager.WIFI_STATE_DISABLED:
+                    networkStatusDialog.startLoadingDialog();
+                    break;
+            }
+        }
+    };
+
+    public void checkNetworkConnectionStatus() {
         //AlertDialog
-        final NetworkStatusDialog networkStatusDialog =
-                new NetworkStatusDialog(MainActivity.this);
+        networkStatusDialog = new NetworkStatusDialog(MainActivity.this);
+        //WifiManager Configuration
+        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+
         //ConnectivyManager declaration
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -86,31 +129,44 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         if(networkInfo != null && networkInfo.isConnected()){
             wifiConnected = true;
         }else{
-            networkStatusDialog.startLoadingDialog();
+            wifiConnected = false;
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        checkNetworkConnectionStatus();
         drawerLayout.closeDrawer(GravityCompat.START);
-        switch (item.getItemId()){
-            case R.id.nav_home:
-                if(wifiConnected){
+        //Verfing Wifi Conexion
+        //Fragment Selector
+        if(wifiManager.isWifiEnabled()){
+            switch (item.getItemId()){
+                case R.id.nav_home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.container,
                             new HomeFragment()).commit();
-                }
-                break;
-            case R.id.nav_gallery:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                        new GalleryFragment()).commit();
-                break;
-            case R.id.nav_slideshow:
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                        new SlideshowFragment()).commit();
-                break;
+                    break;
+                case R.id.nav_gallery:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                            new GalleryFragment()).commit();
+                    break;
+                case R.id.nav_slideshow:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                            new SlideshowFragment()).commit();
+                    break;
+            }
+        }else{
+            networkStatusDialog.startLoadingDialog();
         }
         return true;
+    }
+
+    private void actionBarToggleConf() {
+        //Action Bar Toogle Configuration on Nav. Drawer
+        drawerLayout = binding.drawerLayout;
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
+                drawerLayout, toolbar, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        actionBarDrawerToggle.syncState();
     }
 
     private void floatingButton() {
@@ -125,16 +181,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return super .onCreateOptionsMenu(menu);
-    }
-
     public void versionStyle(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
         }
     }
+
 }

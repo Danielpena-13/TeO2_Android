@@ -76,7 +76,7 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
                     String searchString = charSequence.toString().toLowerCase();
                     List<Predio> resultData = new ArrayList<>();
                     for (Predio predio : predioList) {
-                        if (predio.getTitle().contains(searchString)) {
+                        if (predio.getTitle().toLowerCase().contains(searchString)) {
                             resultData.add(predio);
                         }
                         filterResults.count = resultData.size();

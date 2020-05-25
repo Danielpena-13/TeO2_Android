@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.SplashActivity"
+    tools:context=".ui.splash.SplashActivity"
     android:gravity="center"
     android:orientation="vertical"
     android:layout_gravity="center"

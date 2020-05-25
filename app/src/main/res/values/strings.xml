@@ -22,4 +22,7 @@
         Nulla dignissim turpis odio, a dictum dui semper vitae. Quisque eleifend vulputate facilisis. Sed interdum ullamcorper ligula eget commodo. Vestibulum ut laoreet turpis. Donec non aliquam nunc, sit amet dictum nulla. Nulla ac orci erat. Donec tempus eget odio sed egestas. Donec sed arcu ante. Suspendisse potenti. Fusce rutrum finibus elit vel accumsan. Maecenas nisi quam, semper quis massa malesuada, dictum maximus odio. Sed at enim nec libero efficitur ornare eu a elit. Quisque faucibus nibh vitae hendrerit scelerisque. Integer euismod ultricies libero, vitae consectetur justo. Mauris rhoncus auctor orci, pulvinar ornare erat condimentum ut. Donec at nisi nec mi facilisis bibendum ut sed sapien.
     </string>
     <string name="msg_internet_status">You\'re not connected to any network</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

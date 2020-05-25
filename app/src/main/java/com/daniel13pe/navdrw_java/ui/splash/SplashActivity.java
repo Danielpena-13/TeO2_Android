@@ -1,17 +1,14 @@
-package com.daniel13pe.navdrw_java.ui;
+package com.daniel13pe.navdrw_java.ui.splash;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.Window;
 
 import com.daniel13pe.navdrw_java.MainActivity;
 import com.daniel13pe.navdrw_java.R;
 import java.util.Timer;
 import java.util.TimerTask;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends Activity {
 
