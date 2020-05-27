@@ -5,49 +5,33 @@ import java.util.List;
 
 public class Predio implements Serializable {
 
-    private String thumbnailUrl;
     private int id;
-    private String title;
+    private String nombrePredio;
+    private String entidad;
     private List<Imagenes> imagenes = null;
 
     public Predio(){}
 
-    public Predio(String thumbnailUrl, int id, String title, List<Imagenes> imagenes) {
-        this.thumbnailUrl = thumbnailUrl;
+    public Predio(int id, String nombrePredio, String entidad, List<Imagenes> imagenes) {
         this.id = id;
-        this.title = title;
+        this.nombrePredio = nombrePredio;
+        this.entidad = entidad;
         this.imagenes = imagenes;
     }
 
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
+    public int getId() { return id; }
 
-    public void setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public int getId() {
-        return id;
-    }
+    public String getNombrePredio() { return nombrePredio; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setNombrePredio(String nombrePredio) { this.nombrePredio = nombrePredio; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getEntidad() { return entidad; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setEntidad(String entidad) { this.entidad = entidad; }
 
-    public List<Imagenes> getImagenes() {
-        return imagenes;
-    }
+    public List<Imagenes> getImagenes() { return imagenes; }
 
-    public void setImagenes(List<Imagenes> imagenes) {
-        this.imagenes = imagenes;
-    }
+    public void setImagenes(List<Imagenes> imagenes) { this.imagenes = imagenes; }
 }

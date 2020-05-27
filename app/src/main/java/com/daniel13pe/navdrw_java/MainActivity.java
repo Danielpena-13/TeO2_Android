@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private NetworkStatusDialog networkStatusDialog;
     private NavigationView navigationView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

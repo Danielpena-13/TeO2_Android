@@ -18,6 +18,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.daniel13pe.navdrw_java.adapters.CustomAdapter;
 import com.daniel13pe.navdrw_java.databinding.FragmentHomeBinding;
 import com.daniel13pe.navdrw_java.entities.Predio;
 import com.daniel13pe.navdrw_java.network.APIclient;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONArray;
 
@@ -40,6 +42,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,6 +56,7 @@ public class HomeFragment extends Fragment {
     private static List<Predio> predioList;
     private ProgressDialog progressDialog;
     private CustomAdapter customAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @NonNull
     @Override
@@ -80,8 +84,6 @@ public class HomeFragment extends Fragment {
                     customAdapter = new CustomAdapter(predioList, getActivity());
                     gridView.setAdapter(customAdapter);
 
-                    //Action when GridItem is Clicked.
-                    onClickItemGrid();
                 }else {
                     Toast.makeText(getContext(), "An error occured", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
@@ -95,7 +97,25 @@ public class HomeFragment extends Fragment {
                 progressDialog.dismiss();
             }
         });
+
+        //Action when GridItem is Clicked.
+        onClickItemGrid();
+
+        //Swipe Refresh Action
+        swipeRefreshGesture();
+
         return view;
+    }
+
+    private void swipeRefreshGesture() {
+        swipeRefreshLayout = binding.swipeRefresh;
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                customAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -122,14 +142,42 @@ public class HomeFragment extends Fragment {
     }
 
     private void onClickItemGrid() {
+        //Click Item Action
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), DetailPredioActivity.class);
-                intent.putExtra("NombrePredio", predioList.get(position).getTitle());
-                intent.putExtra("ImgPredio",predioList.get(position).getThumbnailUrl());
+                intent.putExtra("NombrePredio", predioList.get(position).getNombrePredio());
+                intent.putExtra("ImgCampesino",predioList.get(position).getImagenes().get(0).getDireccionBucket());
                 startActivity(intent);
                 requireActivity().overridePendingTransition(R.anim.slide_up,R.anim.slide_down);
+            }
+        });
+
+        //Long Click Item Action
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+                //Creating Bottom Sheet Dialog
+
+                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(requireActivity(), R.style.BottomSheetDialogTheme);
+                View bottomSheetView = LayoutInflater.from(requireActivity())
+                        .inflate(R.layout.bottom_sheet_dialog_detail,
+                                (LinearLayout)view.findViewById(R.id.linear_bottom_sheet));
+
+                //FindViews assign variables
+                ImageView imageView = bottomSheetView.findViewById(R.id.img_campesino_sheet_dialog);
+                TextView textView = bottomSheetView.findViewById(R.id.tx_nombrePredio_sheet_dialog);
+
+                Glide.with(requireContext())
+                        .load(predioList.get(position).getImagenes().get(0).getDireccionBucket())
+                        .into(imageView);
+                textView.setText(predioList.get(position).getNombrePredio());
+
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.setCanceledOnTouchOutside(false);
+                bottomSheetDialog.show();
+                return true;
             }
         });
     }

@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.graphics.Outline;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,7 +26,8 @@ public class DetailPredioActivity extends AppCompatActivity {
     ActivityDetailPredioBinding binding;
 
     private TextView nombrePredioDetalleAct;
-    private ImageView imgPredioDetalleAct;
+    private ImageView imgCampesinoDetalleAct;
+    private RelativeLayout relativeLayout;
 
     private Toolbar toolbar;
     private CollapsingToolbarLayout ctl;
@@ -48,7 +54,7 @@ public class DetailPredioActivity extends AppCompatActivity {
     }
     private void bindViews() {
         nombrePredioDetalleAct = binding.txNombrePredioDetailA;
-        imgPredioDetalleAct = binding.imgCampDetailA;
+        imgCampesinoDetalleAct = binding.imgCampDetailA;
         toolbar = binding.toolbarDetail;
         ctl = binding.collapsingBar;
     }
@@ -59,8 +65,8 @@ public class DetailPredioActivity extends AppCompatActivity {
         nombrePredioDetalleAct.setText(intent.getExtras().getString("NombrePredio"));
         //Glide
         Glide.with(this)
-                .load(intent.getExtras().getString("ImgPredio"))
-                .into(imgPredioDetalleAct);
+                .load(intent.getExtras().getString("ImgCampesino"))
+                .into(imgCampesinoDetalleAct);
 
     }
 

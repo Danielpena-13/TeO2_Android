@@ -50,16 +50,18 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = LayoutInflater.from(context).inflate(R.layout.lista_predios, parent, false);
         //FindViews
-        TextView nombreCampesino = view.findViewById(R.id.tx_nombreCampesino);
+        TextView nombrePredio = view.findViewById(R.id.tx_nombrePredio);
         ImageView imageCampesino = view.findViewById(R.id.img_persona);
-        TextView idImage = view.findViewById(R.id.tx_id);
+        TextView entidad = view.findViewById(R.id.tx_entidad);
         //Set Data
-        nombreCampesino.setText(predioListFiltered.get(position).getTitle());
-        idImage.setText(predioListFiltered.get(position).getImagenes().get(0).getNombreImage());
+        nombrePredio.setText(predioListFiltered.get(position).getNombrePredio());
+        entidad.setText(predioListFiltered.get(position).getEntidad());
         //Glide ImageView
         Glide.with(context)
-                .load(predioListFiltered.get(position).getThumbnailUrl())
+                .load(predioListFiltered.get(position).getImagenes().get(0).getDireccionBucket())
                 .into(imageCampesino);
+
+
         return view;
     }
 
@@ -76,7 +78,7 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
                     String searchString = charSequence.toString().toLowerCase();
                     List<Predio> resultData = new ArrayList<>();
                     for (Predio predio : predioList) {
-                        if (predio.getTitle().toLowerCase().contains(searchString)) {
+                        if (predio.getNombrePredio().toLowerCase().contains(searchString)) {
                             resultData.add(predio);
                         }
                         filterResults.count = resultData.size();

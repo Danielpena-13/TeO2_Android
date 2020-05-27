@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="173dp"
-    android:layout_height="260dp"
+    android:layout_height="283dp"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:layout_margin="3dp"
@@ -14,9 +14,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorCardView">
-        
+        android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/img_persona"
             android:layout_width="match_parent"
@@ -24,31 +23,38 @@
             android:src="@mipmap/ic_launcher_round"
             android:scaleType="centerCrop"/>
 
-        <TextView
-            android:id="@+id/tx_nombreCampesino"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre Campesino"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="3dp"
-            android:textColor="@color/colorWhite"
-            android:layout_below="@+id/img_persona"
-            />
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:background="@color/colorCardView"
+            android:layout_below="@+id/img_persona">
 
-        <TextView
-            android:id="@+id/tx_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="id"
-            android:textSize="13sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorWhite"
-            android:layout_below="@+id/tx_nombreCampesino"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="5dp"/>
+            <TextView
+                android:id="@+id/tx_nombrePredio"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:text="Nombre Campesino"
+                android:lineHeight="18dp"
+                android:singleLine="true"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/colorAccent"/>
+
+            <TextView
+                android:id="@+id/tx_entidad"
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:text="Entidad"
+                android:singleLine="true"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:layout_below="@+id/tx_nombrePredio"
+                android:layout_marginTop="7dp"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -3,11 +3,11 @@ package com.daniel13pe.navdrw_java.entities;
 public class Imagenes {
 
     private int id;
-    private String nombreImage;
+    private String direccionBucket;
 
-    public Imagenes(int id, String nombreImage) {
+    public Imagenes(int id, String direccionBucket) {
         this.id = id;
-        this.nombreImage = nombreImage;
+        this.direccionBucket = direccionBucket;
     }
 
     public int getId() {
@@ -18,11 +18,9 @@ public class Imagenes {
         this.id = id;
     }
 
-    public String getNombreImage() {
-        return nombreImage;
-    }
+    public String getDireccionBucket() { return direccionBucket; }
 
-    public void setNombreImage(String nombreImage) {
-        this.nombreImage = nombreImage;
+    public void setDireccionBucket(String direccionBucket) {
+        this.direccionBucket = direccionBucket;
     }
 }
