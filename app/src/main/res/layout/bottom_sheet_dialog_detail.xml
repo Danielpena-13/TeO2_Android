@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/linear_bottom_sheet"
-    android:background="@drawable/rounded_detail">
+    android:background="@drawable/rounded_detail" >
 
     <ImageView
         android:id="@+id/img_campesino_sheet_dialog"
