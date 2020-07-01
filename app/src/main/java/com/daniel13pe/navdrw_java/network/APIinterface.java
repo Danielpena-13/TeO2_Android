@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 
 public interface APIinterface {
 
-    @GET("api/json/get/N1uEXV-iu")
+    @GET("api/json/get/Nkblpszh_")
     Call<List<Predio>> getPredio();
 }

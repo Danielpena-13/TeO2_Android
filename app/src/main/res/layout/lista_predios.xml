@@ -4,11 +4,11 @@
     android:foreground="?android:selectableItemBackground"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="173dp"
+    android:layout_width="169dp"
     android:layout_height="283dp"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:layout_margin="3dp"
+    android:layout_margin="7dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="5dp">
 
@@ -21,13 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:src="@mipmap/ic_launcher_round"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:transitionName="ImageTransition"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="5dp"
-            android:background="@color/colorCardView"
+            android:background="@color/colorWhite"
             android:layout_below="@+id/img_persona">
 
             <TextView
@@ -40,7 +41,8 @@
                 android:textSize="21sp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:textColor="@color/colorAccent"/>
+                android:textColor="@color/colorAccent"
+                android:transitionName="NameTransition"/>
 
             <TextView
                 android:id="@+id/tx_entidad"
@@ -50,7 +52,7 @@
                 android:singleLine="true"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorPrimary"
                 android:layout_below="@+id/tx_nombrePredio"
                 android:layout_marginTop="7dp"/>
 

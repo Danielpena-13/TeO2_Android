@@ -1,4 +1,4 @@
-package com.daniel13pe.navdrw_java;
+package com.daniel13pe.navdrw_java.ui.main;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,39 +9,34 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
-import android.widget.Toast;
 
+import com.daniel13pe.navdrw_java.R;
+import com.daniel13pe.navdrw_java.adapters.NotificationCounter;
 import com.daniel13pe.navdrw_java.databinding.ActivityMainBinding;
 import com.daniel13pe.navdrw_java.ui.gallery.GalleryFragment;
-import com.daniel13pe.navdrw_java.ui.home.HomeFragment;
+import com.daniel13pe.navdrw_java.ui.predios.PrediosFragment;
 import com.daniel13pe.navdrw_java.ui.networkstatus.NetworkStatusDialog;
 import com.daniel13pe.navdrw_java.ui.networkstatus.NoConnectedFragment;
 import com.daniel13pe.navdrw_java.ui.slideshow.SlideshowFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity  implements
+        BottomNavigationView.OnNavigationItemSelectedListener{
 
     //ActivityBinding Class instance
-    ActivityMainBinding binding;
+    private ActivityMainBinding binding;
 
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
     private Boolean wifiConnected = false;
-    private WifiManager wifiManager;
     private NetworkStatusDialog networkStatusDialog;
-    private NavigationView navigationView;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +46,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         setContentView(binding.getRoot());
 
         //Setting up ToolBar
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = binding.toolbarMain;
         setSupportActionBar(toolbar);
-
-        //Seleccionar onClickEvent al navigationView
-        navigationView = binding.navView;
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //Action Bar Toogle Configuration on Nav. Drawer
-        actionBarToggleConf();
 
         //Checking for SDK version for Styling
         versionStyle();
@@ -67,21 +55,35 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         //Check for Network Status
         checkNetworkConnectionStatus();
 
+        //Bottom Navigation Setting
+        bottomNavigationView = binding.bottomNavigationView;
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+
         //Cargar Fragment en primera instancia y asegurar rotacion segura
         instantStateFragments(savedInstanceState);
 
-        //Floating Button Action
-        floatingButton();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt("SelectedItemId", bottomNavigationView.getSelectedItemId());
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        int selectedItemId = savedInstanceState.getInt("SelectedItemId");
+        bottomNavigationView.setSelectedItemId(selectedItemId);
     }
 
     private void instantStateFragments(Bundle instanceState) {
         if(instanceState == null && wifiConnected){
             getSupportFragmentManager().beginTransaction().replace(R.id.container,
                     new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+            binding.bottomNavigationView.setSelectedItemId(R.id.nav_home);
         }else{
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                    new NoConnectedFragment()).commit();
+            fragmentNoConnected();
         }
     }
 
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
                     wifiConnected = true;
                     break;
                 case WifiManager.WIFI_STATE_DISABLED:
+                    wifiConnected = false;
                     networkStatusDialog.startLoadingDialog();
                     break;
             }
@@ -118,8 +121,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         //AlertDialog
         networkStatusDialog = new NetworkStatusDialog(MainActivity.this);
         //WifiManager Configuration
-        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-
+        WifiManager wifiManager = (WifiManager) getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
         //ConnectivyManager declaration
         ConnectivityManager connectivityManager = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -133,57 +136,56 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        drawerLayout.closeDrawer(GravityCompat.START);
-        //Verfing Wifi Conexion
-        //Fragment Selector
-        if(wifiManager.isWifiEnabled()){
-            switch (item.getItemId()){
-                case R.id.nav_home:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                            new HomeFragment()).commit();
-                    break;
-                case R.id.nav_gallery:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                            new GalleryFragment()).commit();
-                    break;
-                case R.id.nav_slideshow:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,
-                            new SlideshowFragment()).commit();
-                    break;
-            }
-        }else{
-            networkStatusDialog.startLoadingDialog();
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
         return true;
     }
 
-    private void actionBarToggleConf() {
-        //Action Bar Toogle Configuration on Nav. Drawer
-        drawerLayout = binding.drawerLayout;
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
-                drawerLayout, toolbar, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
-        actionBarDrawerToggle.syncState();
-    }
 
-    private void floatingButton() {
-        //Floating Button
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Next Action to Add new Predios(Admin.)", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        //Verfing Wifi Conexion
+        switch (item.getItemId()){
+            case R.id.nav_home:
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.container, new HomeFragment()).commit();
+                return true;
+            case R.id.nav_predios:
+                if(wifiConnected){
+                    getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                            .replace(R.id.container, new PrediosFragment()).commit();
+                }else{
+                    fragmentNoConnected();
+                }
+                return true;
+            case R.id.nav_tramite:
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.container, new SlideshowFragment()).commit();
+                return true;
+            case R.id.nav_perfil:
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                        .replace(R.id.container, new GalleryFragment()).commit();
+                return true;
+        }
+
+        return false;
     }
 
     public void versionStyle(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
+            getWindow().setStatusBarColor(getResources().getColor(R.color.colorPrimary));
         }
+    }
+
+    public  void fragmentNoConnected(){
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                .replace(R.id.container, new NoConnectedFragment()).commit();
     }
 
 }
