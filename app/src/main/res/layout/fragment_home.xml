@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".ui.main.HomeFragment">
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <LinearLayout
+           android:id="@+id/linearhome1"
+           android:layout_width="match_parent"
+           android:layout_height="134sp"
+           android:background="@drawable/rounded_home_background"
+           android:orientation="vertical" />
+
+       <GridLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:alignmentMode="alignMargins"
+           android:layout_marginTop="40dp"
+           android:columnCount="2"
+           android:columnOrderPreserved="false"
+           android:padding="3dp"
+           android:rowCount="3">
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cardView_Predios"
+               android:layout_width="0dp"
+               android:layout_height="140dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_margin="13dp"
+               app:cardElevation="5dp"
+               android:foreground="?android:selectableItemBackground"
+               android:clickable="true"
+               android:background="@color/colorWhite"
+               app:cardCornerRadius="13dp">
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_margin="5dp"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/icon_1"
+                       android:layout_width="80dp"
+                       android:layout_height="70dp"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:src="@drawable/ic_trees"/>
+
+                   <com.nightonke.boommenu.BoomMenuButton
+                       android:id="@+id/bmb_option_predios"
+                       android:layout_width="0dp"
+                       android:layout_height="0dp"
+                       android:layout_marginStart="79dp"
+                       android:layout_marginTop="23dp"
+                       android:layout_marginEnd="75dp"
+                       android:layout_marginBottom="23dp"
+                       app:bmb_boomEnum="boomParabola_1"
+                       app:bmb_buttonEnum="textOutsideCircle"
+                       app:bmb_buttonPlaceEnum="buttonPlace_sc_3_1"
+                       app:bmb_piecePlaceEnum="piecePlace_dot_3_1"
+                       app:bmb_dimColor="@color/colorCardView"
+                       app:bmb_normalColor="#00ffffff"
+                       app:bmb_shadowColor="#00ffffff"
+                       app:bmb_rippleEffect="true"
+                       app:bmb_shadowEffect="false"
+                       app:bmb_showDuration="700"
+                       app:bmb_showRotateEaseEnum="outBack" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/icon_1"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:gravity="center"
+                       android:text="Predios"
+                       android:textColor="@color/colorAccent"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cardView_Datos"
+               android:layout_width="0dp"
+               android:layout_height="140dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_margin="13dp"
+               app:cardElevation="5dp"
+               android:foreground="?android:selectableItemBackground"
+               android:clickable="true"
+               android:background="@color/colorWhite"
+               app:cardCornerRadius="13dp">
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_margin="5dp"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/icon_2"
+                       android:layout_width="80dp"
+                       android:layout_height="70dp"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:src="@drawable/ic_research" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/icon_2"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:gravity="center"
+                       android:text="Datos"
+                       android:textColor="@color/colorAccent"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cardView_Comercializacion"
+               android:layout_width="0dp"
+               android:layout_height="140dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_margin="13dp"
+               app:cardElevation="5dp"
+               android:foreground="?android:selectableItemBackground"
+               android:clickable="true"
+               android:background="@color/colorWhite"
+               app:cardCornerRadius="13dp">
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_margin="5dp"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/icon_3"
+                       android:layout_width="80dp"
+                       android:layout_height="70dp"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:src="@drawable/ic_035_plant" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/icon_3"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:gravity="center"
+                       android:text="Comercialización Carbon"
+                       android:textColor="@color/colorAccent"
+                       android:textSize="18dp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cardView_Noticias"
+               android:layout_width="0dp"
+               android:layout_height="140dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_margin="13dp"
+               app:cardElevation="5dp"
+               android:foreground="?android:selectableItemBackground"
+               android:clickable="true"
+               android:background="@color/colorWhite"
+               app:cardCornerRadius="13dp">
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_margin="5dp"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/icon_4"
+                       android:layout_width="80dp"
+                       android:layout_height="70dp"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:src="@drawable/ic_026_green" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/icon_4"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:gravity="center"
+                       android:text="Noticias"
+                       android:textColor="@color/colorAccent"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cardView_Info"
+               android:layout_width="0dp"
+               android:layout_height="140dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_margin="13dp"
+               app:cardElevation="5dp"
+               android:foreground="?android:selectableItemBackground"
+               android:clickable="true"
+               android:background="@color/colorWhite"
+               app:cardCornerRadius="13dp">
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_margin="5dp"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/icon_5"
+                       android:layout_width="80dp"
+                       android:layout_height="70dp"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:src="@drawable/ic_037_green_earth" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/icon_5"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:gravity="center"
+                       android:text="Info. General"
+                       android:textColor="@color/colorAccent"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cardView_vincularse"
+               android:layout_width="0dp"
+               android:layout_height="140dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_margin="13dp"
+               app:cardElevation="5dp"
+               android:foreground="?android:selectableItemBackground"
+               android:clickable="true"
+               android:background="@color/colorWhite"
+               app:cardCornerRadius="13dp">
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_margin="5dp"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/icon_6"
+                       android:layout_width="80dp"
+                       android:layout_height="70dp"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:src="@drawable/ic_008_growing_seed" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/icon_6"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:gravity="center"
+                       android:text="Como Vincularte"
+                       android:textColor="@color/colorAccent"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cardView_Contacto"
+               android:layout_width="0dp"
+               android:layout_height="140dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_margin="13dp"
+               app:cardElevation="5dp"
+               android:foreground="?android:selectableItemBackground"
+               android:clickable="true"
+               android:background="@color/colorWhite"
+               app:cardCornerRadius="13dp">
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_margin="5dp"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/icon_7"
+                       android:layout_width="80dp"
+                       android:layout_height="70dp"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:src="@drawable/ic_001_green_energy" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/icon_7"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:gravity="center"
+                       android:text="Contactanos!"
+                       android:textColor="@color/colorAccent"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+
+           <androidx.cardview.widget.CardView
+               android:id="@+id/cardView_somos"
+               android:layout_width="0dp"
+               android:layout_height="140dp"
+               android:layout_rowWeight="1"
+               android:layout_columnWeight="1"
+               android:layout_margin="13dp"
+               app:cardElevation="5dp"
+               android:foreground="?android:selectableItemBackground"
+               android:clickable="true"
+               android:background="@color/colorWhite"
+               app:cardCornerRadius="13dp">
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_margin="5dp"
+                   android:gravity="center">
+                   <ImageView
+                       android:id="@+id/icon_8"
+                       android:layout_width="80dp"
+                       android:layout_height="70dp"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:src="@drawable/ic_030_informa" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_below="@+id/icon_8"
+                       android:layout_alignParentStart="true"
+                       android:layout_alignParentEnd="true"
+                       android:gravity="center"
+                       android:text="Quienes Somos?"
+                       android:textColor="@color/colorAccent"
+                       android:textSize="21dp"
+                       android:textStyle="bold" />
+               </RelativeLayout>
+           </androidx.cardview.widget.CardView>
+
+       </GridLayout>
+
+   </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
